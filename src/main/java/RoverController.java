@@ -27,9 +27,12 @@ public class RoverController {
             String roverCommands = reader.readLine();
             rover.move(roverCommands);
         }
-
-        for(Rover r : rovers) {
-            System.out.println(r.toString());
-        }
     }
+
+    public List<Rover> getRovers() {
+        return rovers;
+    }
+
+
+
 }
