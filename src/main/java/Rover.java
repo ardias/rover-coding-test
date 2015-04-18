@@ -9,27 +9,6 @@ import java.util.List;
  */
 public class Rover {
 
-    private enum RoverCommand {
-        L('L'),
-        R('R'),
-        M('M'),
-        OTHER((char)-1);
-
-        char value;
-        RoverCommand(char pos) {
-            this.value = pos;
-        }
-
-        public static RoverCommand fromChar(char cmd) {
-            return RoverCommand.M.value == cmd ?
-                    RoverCommand.M :
-                    (RoverCommand.L.value == cmd ?
-                            RoverCommand.L :
-                            (RoverCommand.R.value == cmd ?
-                                    RoverCommand.R : RoverCommand.OTHER));
-        }
-    }
-
     private Position pos;
     private Orientation orientation;
     private Plateau plateau;
@@ -58,27 +37,11 @@ public class Rover {
         return new Rover(x, y, o, plateau);
     }
 
-    public void move(String roverCommands) {
+    public void move(List<RoverCommand> roverCommands) {
         if (null == roverCommands)
             throw new  IllegalArgumentException("rover roverCommands cannot be null");
 
-        //convert everything to lowercase just to make it easier to parse
-        roverCommands = roverCommands.toUpperCase();
-        StringReader sr = new StringReader(roverCommands);
-        List<RoverCommand> commands = new ArrayList<RoverCommand>();
-        char cmd;
-        int val;
-        try {
-            while( -1 != (val = sr.read())) {
-                cmd = (char) val;
-                RoverCommand rc = RoverCommand.fromChar(cmd);
-                commands.add(rc);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        for(RoverCommand rc : commands) {
+        for(RoverCommand rc : roverCommands) {
             switch (rc) {
                 case L:
                     this.orientation = orientation.spinLeft();

@@ -20,12 +20,15 @@ public class RoverController {
         String plateauCoordinates = reader.readLine();
         plateau = Plateau.create(plateauCoordinates);
 
+        RoverCommandParser commandParser;
         String roverPos;
         while ((roverPos = reader.readLine()) != null) {
             Rover rover = Rover.create(roverPos, plateau);
             rovers.add(rover);
+
             String roverCommands = reader.readLine();
-            rover.move(roverCommands);
+            commandParser = new RoverCommandParser(roverCommands);
+            rover.move(commandParser.parse());
         }
     }
 
