@@ -17,7 +17,7 @@ public class RoverTest {
     @Test
     public void itShouldNotMoveNorthIfAtTop() {
         Plateau plateau = Plateau.create("2 2");
-        sut = Rover.create("2 2 N", plateau);
+        sut = Rover.create("Dogbert","2 2 N", plateau);
 
         List<RoverCommand> commandList = new ArrayList<RoverCommand>(1);
         commandList.add(RoverCommand.fromChar('M'));
@@ -32,7 +32,7 @@ public class RoverTest {
     @Test
     public void itShouldNotMoveNorthIfAtBottom() {
         Plateau plateau = Plateau.create("2 2");
-        sut = Rover.create("0 0 S", plateau);
+        sut = Rover.create("Alice","0 0 S", plateau);
         List<RoverCommand> commandList = new ArrayList<RoverCommand>(1);
         commandList.add(RoverCommand.fromChar('M'));
 
@@ -46,7 +46,7 @@ public class RoverTest {
     @Test
      public void itShouldNotMoveNorthIfAtRight() {
         Plateau plateau = Plateau.create("2 2");
-        sut = Rover.create("2 0 E", plateau);
+        sut = Rover.create("Bob","2 0 E", plateau);
         List<RoverCommand> commandList = new ArrayList<RoverCommand>(1);
         commandList.add(RoverCommand.fromChar('M'));
 
@@ -60,7 +60,7 @@ public class RoverTest {
     @Test
     public void itShouldNotMoveNorthIfAtLeft() {
         Plateau plateau = Plateau.create("2 2");
-        sut = Rover.create("0 0 W", plateau);
+        sut = Rover.create("Wally", "0 0 W", plateau);
         List<RoverCommand> commandList = new ArrayList<RoverCommand>(1);
         commandList.add(RoverCommand.fromChar('M'));
 
@@ -74,7 +74,7 @@ public class RoverTest {
     @Test
     public void itShouldMoveToTopRightStartingAtLowerLeft() {
         Plateau plateau = Plateau.create("2 2");
-        sut = Rover.create("0 0 N", plateau);
+        sut = Rover.create("Dilbert", "0 0 N", plateau);
         Position endPos = new Position(2,2);
         List<RoverCommand> commandList = new RoverCommandParser("RMMLMM").parse();
 

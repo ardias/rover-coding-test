@@ -6,7 +6,7 @@ public class Position {
     private int x;
     private int y;
 
-    public Position(int x, int y) {
+    public Position(final int x, final int y) {
         if (x < 0)
             throw new IllegalArgumentException("x is invalid");
         if (y < 0)

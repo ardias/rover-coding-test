@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 /**
  * Created by Antonio Dias on 18/04/2015.
  */
@@ -6,12 +10,21 @@ public class Plateau {
     private final int width;
     private final int height;
 
+    Cell[][] cells;
+
     private Plateau(int width, int height) {
         this.width = width;
         this.height = height;
+
+        this.cells = new Cell[width][height];
+        for(int i = 0; i < height; i++) {
+            for(int j=0; j < width; j++) {
+                cells[i][j] = new Cell(i, j);
+            }
+        }
     }
 
-    public static Plateau create(String coordinates) {
+    public static Plateau create(final String coordinates) {
         if (null ==  coordinates)
             throw new  IllegalArgumentException("coordinates cannot be null");
 
@@ -32,5 +45,35 @@ public class Plateau {
 
     public int getHeight() {
         return height;
+    }
+
+    private class Cell {
+        int x;
+        int y;
+        AtomicBoolean occupied = new AtomicBoolean(false);
+
+        public Cell(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Cell cell = (Cell) o;
+
+            if (x != cell.x) return false;
+            return y == cell.y;
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = x;
+            result = 31 * result + y;
+            return result;
+        }
     }
 }

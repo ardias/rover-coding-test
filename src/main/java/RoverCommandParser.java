@@ -9,7 +9,7 @@ import java.util.List;
 public class RoverCommandParser {
 
     private String commandString;
-    public RoverCommandParser(String commandString) {
+    public RoverCommandParser(final String commandString) {
         if (null == commandString || commandString.isEmpty())
             throw new  IllegalArgumentException("rover roverCommands cannot be null or empty");
 
